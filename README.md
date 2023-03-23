@@ -43,11 +43,11 @@ We then decided to binarize our two features since the range of these two featur
 
 Looking at the two distributions, we can observe that the distribution of dragon kills begin to dip with 3 or more dragon kills while team baron kills begin to dip with 2 or more baron kills. Thus, we decided to binarize ```dragons``` with a threshold of 2 and ```barons``` with a threshold of 1. 
 
-Fitting and testing this model, we got an accuracy of ~77% on the training data and ~76% on the testing data. These results lead us believe that our current model is good since it has a decently high testing accuracy, and the testing accuracy is not alarmingly lower than the training accuracy.
+Fitting and testing this model, we got an accuracy of ~77% on the training data and ~76% on the testing data. These results lead us to believe that our current model is good since it has a relatively high testing accuracy, and the testing accuracy is not alarmingly lower than the training accuracy.
 
 ### Final Models
 
-To create a better model, we decided to also incorporate objective kills ```firstdragon``` and ```firstbaron```. We chose these two features because they are closely related to the features we chose in our baseline model. We will not need to transform these values since they are already binary encoded.
+In an attempt to create a better model, we decided to also incorporate objective kills ```firstdragon``` and ```firstbaron```. We chose these two features because they are closely related to the features we chose in our baseline model. We will not need to transform these values since they are already binary encoded.
 
 To include these new features, we trained our model using a bigger subset of our data with columns ```dragons```, ```barons```, ```firstdragon```, ```firstbaron```, and ```result```.
 
