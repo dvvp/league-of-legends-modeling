@@ -53,7 +53,7 @@ To include these new features, we trained our model using a bigger subset of our
 
 Fitting and testing this model, we got an accuracy of ~84% on the training data and ~84% on the testing data which is a vast improvement. It does seem like mob kills does seem to influence win rate.
 
-To try and improve our model even more, we will now also incorporate non-mob related features to see if our model  can perform any better. We will now include ```kills``` and ```assists`` into our data. Having more kills in the game could potentially mean your team is doing well in the game, and having more assists could potentially mean your team is effectively working together. We chose to use a standard scaler transformer to transform our data so that it fits a normal distribution.
+To try and improve our model even more, we will now also incorporate non-mob related features to see if our model  can perform any better. We will now include ```kills``` and ```assists``` into our data. Having more kills in the game could potentially mean your team is doing well in the game, and having more assists could potentially mean your team is effectively working together. We chose to use a standard scaler transformer to transform our data so that it fits a normal distribution.
 
 To include these new features, we trained our model using an even bigger subset of our data with columns ```dragons```, ```barons```, ```firstdragon```, ```firstbaron```, ```kills```, ```assists```, ```result```.
 
