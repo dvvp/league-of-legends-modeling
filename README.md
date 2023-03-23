@@ -11,15 +11,15 @@ In our [exploratory data analysis](https://dvvp.github.io/league-of-legends-eda/
 
 Question we plan on investigating:
 
-- How can we predict wins and losses for League of Legends Matches?
+- How can we predict wins and losses for League of Legends matches?
 
 We chose this response variable because it is the most important when it comes to playing in a League of Legends tournament. The main goal for playing in a League of Legends tournaments is to win which means we must discover how League of Legends players win and lose.
 
 Since the classes are balanced (i.e., predicting a win and predicting a loss is of equal importance), we will choose accuracy as our evaluation metric.
 
-At the time of prediction (before the winner is announced), we should be able to have data for both MOB and player kills, given that this data is being actively collected. This includes whether a team achieved an objective kill or simply the number of kills of each respective mob and player. Because of this, we will be using a combination of these in our model.
+At the time of prediction (before the winner is announced), we should be able to have data for both MOB and player kills, given that this data is being actively collected. This includes whether a team achieved an objective kill or simply the number of kills of each respective MOB and player. Because of this, we will be using a combination of these features in our model.
 
-We will use our cleaned ```teams``` DataFrame retrieved from our EDA to model our data. Here are the first 5 rows from that dataset:
+We will use our cleaned ```teams``` DataFrame retrieved from our EDA to build our model. Here are the first 5 rows from that dataset:
 
 ***Note:*** These are the first 5 rows of the DataFrame
 
@@ -33,7 +33,15 @@ We will use our cleaned ```teams``` DataFrame retrieved from our EDA to model ou
 
 ### Baseline Model
 
+For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesize that these buffs will help players stay in the game longer which will give them more time to be able to destroy the nexus of the opposite team. 
 
+We decided to binarize these two features since the range of the two features were so small. The distribution of each features is shown below:
+
+<iframe src="assets/dragons-dist.html" width=800 height=600 frameBorder=0></iframe>
+
+<iframe src="assets/barons-dist.html" width=800 height=600 frameBorder=0></iframe>
+
+We observed that team dragon kills begin to dip with 3 or more dragon kills while team baron kills begin to dip with 2 or more baron kills.
 
 ### Final Model
 
