@@ -13,15 +13,13 @@ Question we plan on investigating:
 
 - How can we predict wins and losses for League of Legends matches?
 
-We chose this response variable because it is the most important when it comes to playing in a League of Legends tournament. The main goal for playing in a League of Legends tournaments is to win which means we must discover how League of Legends players win and lose.
+We chose this response variable because it is the most important when it comes to playing in a League of Legends tournament. The main goal for playing in a League of Legends tournament is to win which means we must discover how to predict League of Legends match outcomes.
 
 Since the classes are balanced (i.e., predicting a win and predicting a loss is of equal importance), we will choose accuracy as our evaluation metric.
 
 At the time of prediction (before the winner is announced), we should be able to have data for both MOB and player kills, given that this data is being actively collected. This includes whether a team achieved an objective kill or simply the number of kills of each respective MOB and player. Because of this, we will be using a combination of these features in our model.
 
 We will use our cleaned ```teams``` DataFrame retrieved from our EDA to build our model. Here are the first 5 rows from that dataset:
-
-***Note:*** These are the first 5 rows of the DataFrame
 
 |                               | datacompleteness   |   url | league   |   year | split   | playoffs   | date                |   game |   patch |   participantid | side   | position   | teamname                      | teamid                                  | ban1    | ban2         | ban3         | ban4     | ban5    |   gamelength | result   |   kills |   deaths |   assists |   teamkills |   teamdeaths |   doublekills |   triplekills |   quadrakills |   pentakills |   firstblood |   team kpm |   ckpm |   firstdragon |   dragons |   opp_dragons |   elementaldrakes |   opp_elementaldrakes |   infernals |   mountains |   clouds |   oceans |   chemtechs |   hextechs |   dragons (type unknown) |   elders |   opp_elders |   firstherald |   heralds |   opp_heralds |   firstbaron |   barons |   opp_barons |   firsttower |   towers |   opp_towers |   firstmidtower |   firsttothreetowers |   turretplates |   opp_turretplates |   inhibitors |   opp_inhibitors |   damagetochampions |     dpm |   damagetakenperminute |   damagemitigatedperminute |   wardsplaced |    wpm |   wardskilled |   wcpm |   controlwardsbought |   visionscore |   vspm |   totalgold |   earnedgold |   earned gpm |   goldspent |       gspd |   minionkills |   monsterkills |   monsterkillsownjungle |   monsterkillsenemyjungle |    cspm |   goldat10 |   xpat10 |   csat10 |   opp_goldat10 |   opp_xpat10 |   opp_csat10 |   golddiffat10 |   xpdiffat10 |   csdiffat10 |   killsat10 |   assistsat10 |   deathsat10 |   opp_killsat10 |   opp_assistsat10 |   opp_deathsat10 |   goldat15 |   xpat15 |   csat15 |   opp_goldat15 |   opp_xpat15 |   opp_csat15 |   golddiffat15 |   xpdiffat15 |   csdiffat15 |   killsat15 |   assistsat15 |   deathsat15 |   opp_killsat15 |   opp_assistsat15 |   opp_deathsat15 |
 |:------------------------------|:-------------------|------:|:---------|-------:|:--------|:-----------|:--------------------|-------:|--------:|----------------:|:-------|:-----------|:------------------------------|:----------------------------------------|:--------|:-------------|:-------------|:---------|:--------|-------------:|:---------|--------:|---------:|----------:|------------:|-------------:|--------------:|--------------:|--------------:|-------------:|-------------:|-----------:|-------:|--------------:|----------:|--------------:|------------------:|----------------------:|------------:|------------:|---------:|---------:|------------:|-----------:|-------------------------:|---------:|-------------:|--------------:|----------:|--------------:|-------------:|---------:|-------------:|-------------:|---------:|-------------:|----------------:|---------------------:|---------------:|-------------------:|-------------:|-----------------:|--------------------:|--------:|-----------------------:|---------------------------:|--------------:|-------:|--------------:|-------:|---------------------:|--------------:|-------:|------------:|-------------:|-------------:|------------:|-----------:|--------------:|---------------:|------------------------:|--------------------------:|--------:|-----------:|---------:|---------:|---------------:|-------------:|-------------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|----------------:|------------------:|-----------------:|-----------:|---------:|---------:|---------------:|-------------:|-------------:|---------------:|-------------:|-------------:|------------:|--------------:|-------------:|----------------:|------------------:|-----------------:|
@@ -33,7 +31,7 @@ We will use our cleaned ```teams``` DataFrame retrieved from our EDA to build ou
 
 ### Baseline Model
 
-For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesized that these buffs will help players stay in the game longer which will give them more time to be able to destroy the nexus of the opposite team. 
+For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesized that these buffs will help players become stronger which will give them advantage over the opposing team. 
 
 For our model, we removed all unecessary features by getting a subset of the data with columns ```dragons```, ```barons```, and ```results```.
 
@@ -49,11 +47,15 @@ Fitting and testing this model, we got an accuracy of ~77% on the training data 
 
 ### Final Models
 
-To create a better model, we now want to incorporate objective kills ```firstdragon``` and ```firstbaron```. We chose these two features because they are closely related to the features we chose in our baseline model. We will not need to transform these values since they are already binary encoded. 
+To create a better model, we decided to also incorporate objective kills ```firstdragon``` and ```firstbaron```. We chose these two features because they are closely related to the features we chose in our baseline model. We will not need to transform these values since they are already binary encoded.
+
+To include these new features, we trained our model using a bigger subset of our data with columns ```dragons```, ```barons```, ```firstdragon```, ```firstbaron```, and ```result```.
 
 Fitting and testing this model, we got an accuracy of ~84% on the training data and ~84% on the testing data which is a vast improvement. It does seem like mob kills does seem to influence win rate.
 
-To try and improve our model even more, we will now also incorporate non-mob related features to see if our model performs any better. We will now include ```kills``` and ```assists`` into our data. Having more kills in the game could potentially mean your team is doing well in the game, and having more assists could potentially mean your team is effectively working together. We chose to use a standard scaler transformer to transform our data so that it fits a normal distribution.
+To try and improve our model even more, we will now also incorporate non-mob related features to see if our model  can perform any better. We will now include ```kills``` and ```assists`` into our data. Having more kills in the game could potentially mean your team is doing well in the game, and having more assists could potentially mean your team is effectively working together. We chose to use a standard scaler transformer to transform our data so that it fits a normal distribution.
+
+To include these new features, we trained our model using an even bigger subset of our data with columns ```dragons```, ```barons```, ```firstdragon```, ```firstbaron```, ```kills```, ```assists```, ```result```.
 
 Fitting and testing this model, we got an accuracy of ~93% on the training data and ~85% on the testing data. We have improved our testing data by just a little bit, but it seems that we now overfitted to our training data.
 
