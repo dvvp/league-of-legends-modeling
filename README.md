@@ -11,7 +11,7 @@ In our [exploratory data analysis](https://dvvp.github.io/league-of-legends-eda/
 
 Question we plan on investigating:
 
-- Can mobile objects (MOBs) kills predict League of Legends match wins?
+- How can we predict wins and losses for League of Legends Matches?
 
 We chose this response variable because it is the most important when it comes to playing in a League of Legends tournament. The main goal for playing in a League of Legends tournaments is to win which means we must discover how League of Legends players win and lose.
 
