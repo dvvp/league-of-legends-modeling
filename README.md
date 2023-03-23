@@ -33,16 +33,36 @@ We will use our cleaned ```teams``` DataFrame retrieved from our EDA to build ou
 
 ### Baseline Model
 
-For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesize that these buffs will help players stay in the game longer which will give them more time to be able to destroy the nexus of the opposite team. 
+For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesized that these buffs will help players stay in the game longer which will give them more time to be able to destroy the nexus of the opposite team. 
 
-We decided to binarize these two features since the range of the two features were so small. The distribution of each features is shown below:
+For our model, we removed all unecessary features by getting a subset of the data with columns ```dragons```, ```barons```, and ```results```.
+
+We then decided to binarize our two features since the range of these two features were so small. The distribution of each feature is shown below:
 
 <iframe src="assets/dragons-dist.html" width=800 height=600 frameBorder=0></iframe>
 
 <iframe src="assets/barons-dist.html" width=800 height=600 frameBorder=0></iframe>
 
-We observed that team dragon kills begin to dip with 3 or more dragon kills while team baron kills begin to dip with 2 or more baron kills.
+Looking at the two distributions, we can observe that the distribution of dragon kills begin to dip with 3 or more dragon kills while team baron kills begin to dip with 2 or more baron kills. Thus, we decided to binarize ```dragons``` with a threshold of 2 and ```barons``` with a threshold of 1. 
 
-### Final Model
+Fitting and testing this model, we got an accuracy of ~77% on the training data and ~76% on the testing data. These results lead us believe that our current model is good since it has a decently high testing accuracy, and the testing accuracy is not alarmingly lower than the training accuracy.
+
+### Final Models
+
+To create a better model, we now want to incorporate objective kills ```firstdragon``` and ```firstbaron```. We chose these two features because they are closely related to the features we chose in our baseline model. We will not need to transform these values since they are already binary encoded. 
+
+Fitting and testing this model, we got an accuracy of ~84% on the training data and ~84% on the testing data which is a vast improvement. It does seem like mob kills does seem to influence win rate.
+
+To try and improve our model even more, we will now also incorporate non-mob related features to see if our model performs any better. We will now include ```kills``` and ```assists`` into our data. Having more kills in the game could potentially mean your team is doing well in the game, and having more assists could potentially mean your team is effectively working together. We chose to use a standard scaler transformer to transform our data so that it fits a normal distribution.
+
+Fitting and testing this model, we got an accuracy of ~93% on the training data and ~85% on the testing data. We have improved our testing data by just a little bit, but it seems that we now overfitted to our training data.
+
+In an attempt to resolve this, we can try to optimize our classifier's hyperparameters using grid search cross-validation. 
+
+Instantiating and fitting our grid search cross-validation object using a decision tree classifier object, we found that the best hyperparameters to use were ```max_depth```=7, ```max_leaf_nodes```=None, and ```min_samples_split```=10. 
+
+Creating a new pipeline with these new hyperparameters, we got an accuracy of ~89% on the training data and ~88% on the testing data. Compared to baseline mode's performance, this is a vast improvement as we improved testing accuracy by roughly 12%.
 
 ### Fairness Analysis
+
+
