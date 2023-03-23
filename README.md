@@ -17,7 +17,7 @@ We chose this response variable because it is the most important when it comes t
 
 Since the classes are balanced (i.e., predicting a win and predicting a loss is of equal importance), we will choose accuracy as our evaluation metric.
 
-At the time of prediction (before the winner is announced), we should be able to have data for both MOB and player kills. This includes whether a team achieved an objective kill or simply number of kills. Because of this, we will be using a combination of this data for our analysis.
+At the time of prediction (before the winner is announced), we should be able to have data for both MOB and player kills, given that this data is being actively collected. This includes whether a team achieved an objective kill or simply the number of kills of each respective mob and player. Because of this, we will be using a combination of these in our model.
 
 We will use our cleaned ```teams``` DataFrame retrieved from our EDA to model our data. Here are the first 5 rows from that dataset:
 
