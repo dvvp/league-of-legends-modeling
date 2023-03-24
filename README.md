@@ -31,7 +31,7 @@ We will use our cleaned ```teams``` DataFrame retrieved from our EDA to build ou
 
 ### Baseline Model
 
-For our baseline model, we decided to include number of baron and dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesized that these buffs will help players become stronger which will give them advantage over the opposing team. 
+For our baseline model, we decided to include two quantitative features: number of baron kills and number of dragons kills. Because killing barons and dragons give you extra buffs in the game, we hypothesized that these buffs will help players become stronger which will give them advantage over the opposing team. 
 
 For our model, we removed all unecessary features by getting a subset of the data with columns ```dragons```, ```barons```, and ```results```.
 
