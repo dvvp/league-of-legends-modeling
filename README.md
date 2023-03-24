@@ -77,8 +77,4 @@ Here are the results of our permutation test visualized:
 
 <iframe src="assets/permutation-test.html" width=800 height=600 frameBorder=0></iframe>
 
-With a p-value of 0.7, we return the null hypothesis. Differences in accuracy between the leagues Proving Grounds Circuit and LCSA seems to be the same. Any differences may be due to random chance.
-
-
-
-
+With a p-value of 0.7, we retain the null hypothesis. Differences in accuracy between the leagues Proving Grounds Circuit and LCSA seems to be the same. Any differences may be due to random chance.
