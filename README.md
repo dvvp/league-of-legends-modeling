@@ -67,4 +67,18 @@ Creating a new pipeline with these new hyperparameters, we got an accuracy of ~8
 
 ### Fairness Analysis
 
+We will now perform our fairness analysis on the two most common leagues in our dataset, Proving Grounds Circuit and LCSA. We will use accuracy score as our evaluation metric and difference in group accuracy score as our test statistic. Our hypotheses are proposed below:
+
+Null hypothesis: Our model is fair. Its accuracy score for Proving Grounds Circuit and LCSA are roughly the same, and any differences are due to random chance.
+
+Alternative hypothesis: Our model is unfair. The accuracy score for Proving Grounds Circuit and LCSA are unequivalent.
+
+Here are the results of our permutation test visualized:
+
+<iframe src="assets/permutation-test.html" width=800 height=600 frameBorder=0></iframe>
+
+With a p-value of 0.7, we return the null hypothesis. Differences in accuracy between the leagues Proving Grounds Circuit and LCSA seems to be the same. Any differences may be due to random chance.
+
+
+
 
